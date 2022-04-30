@@ -1,0 +1,45 @@
+@import "src/styles/variables";
+
+.button {
+  @include height-width(100%, 100%);
+  background-color: $addToCartBackgroundColor;
+  @include flex-center;
+  @include button-common;
+  color: #FFFFFF;
+  transition: all 0.4s linear;
+  box-shadow: 3px 3px 6px 0 rgba(34, 60, 80, 0.2);
+  &:hover {
+    box-shadow: 3px 3px 6px 0 rgba(34, 60, 80, 0.6);
+  }
+  &:active {
+    box-shadow: 3px 3px 6px 0 rgba(34, 60, 80, 1);
+    background-color: #15943d;
+  }
+  &:disabled {
+    background-color: #8fa297;
+    &:hover {
+      box-shadow: 3px 3px 6px 0 rgba(34, 60, 80, 0.3);
+    }
+  }
+  .icon-container {
+    @include height-width(25px, 30px);
+    .icon {
+      @include image-contain;
+    }
+  }
+  .text {
+    @include font-style($mainFont, normal, 16px, 600, uppercase, 120%);
+  }
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.message-container {
+  transform: translate(-100px, -300%);
+  z-index: 10;
+}
+
+
+

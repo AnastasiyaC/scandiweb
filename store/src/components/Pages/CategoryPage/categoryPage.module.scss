@@ -1,0 +1,8 @@
+@import "src/styles/variables";
+
+.title {
+    margin: 160px 0 0;
+    @include font-style($mainFont, normal, 42px, normal, capitalize, 160%);
+    color: $mainFontColor;
+}
+

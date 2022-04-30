@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Roboto&family=Source+Sans+Pro&display=swap');
+
+//font
+$mainFont: 'Raleway', sans-serif;
+$mainFontColor: #1D1F22;
+$robotoFont: 'Roboto', sans-serif;
+$sourceSanProFont: 'Source Sans Pro', sans-serif;
+
+//color
+$mainBackgroundColor: #FFFFFF;
+$addToCartBackgroundColor:  #5ECE7B;
+
+$pageWrapper: 1240px;
+$headerHeight: 80px;
+
+
+@mixin height-width($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin image-contain {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin input-appearance-none {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+@mixin button-common {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@mixin link-common {
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@mixin font-style($family, $style, $size, $weight, $text-transform, $line-height) {
+  font: {
+    family: $family;
+    style: $style;
+    size: $size;
+    weight: $weight;
+  }
+  text-transform: $text-transform;
+  line-height: $line-height;
+}

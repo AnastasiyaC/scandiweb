@@ -1,0 +1,71 @@
+@import "src/styles/variables";
+
+.bag {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 325px;
+  color: $mainFontColor;
+  background-color: $mainBackgroundColor;
+  box-shadow: 1px 5px 20px 0 rgba(34, 60, 80, 0.3);
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: all 0.3s linear;
+  z-index: -1;
+  animation: linear 0.3s forwards appearance;
+  .wrapper {
+    @include height-width(100%, 292px);
+    margin: 0 auto;
+  }
+  .title {
+    margin: 8px 0 0;
+    @include font-style($mainFont, normal, 16px, bold, none, 160%);
+    .items {
+      font-weight: normal;
+    }
+  }
+  .products {
+    max-height: 390px;
+  }
+  .total {
+    width: 100%;
+    margin: 33px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-text {
+      @include font-style($robotoFont, normal, 16px, 500, none, 112%);
+    }
+    .price {
+      @include font-style($mainFont, normal, 16px, 700, none, 160%);
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 35px 0 20px;
+    .button {
+      @include height-width(43px, 140px);
+      @include font-style($mainFont, normal, 14px, 600, uppercase, 120%);
+      @include link-common;
+      @include flex-center;
+      transition: all 0.3s linear;
+    }
+    .button-view {
+      background-color: #FFFFFF;
+      border: 1px solid #1D1F22;
+      color: #1D1F22;
+    }
+    .button-exit {
+      background: #5ECE7B;
+      color: #FFFFFF;
+      border: none;
+    }
+  }
+}
+
+@keyframes appearance {
+  100% {
+    transform: scale(1, 1);
+  }
+}

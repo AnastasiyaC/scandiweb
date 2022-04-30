@@ -1,0 +1,21 @@
+.nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  //&__navitem {
+  //
+  //}
+  //&__navitem + &__navitem {
+  //  margin-left: 32px;
+  //}
+  //&__navlink {
+  //
+  //}
+}

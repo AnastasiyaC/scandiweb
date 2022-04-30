@@ -1,0 +1,13 @@
+@import "src/styles/variables";
+
+.main {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  position: absolute;
+  background-color: $mainBackgroundColor;
+  .wrapper {
+    @include height-width(100%, $pageWrapper);
+    margin: 0 auto;
+  }
+}

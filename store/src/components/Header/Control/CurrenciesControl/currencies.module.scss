@@ -1,0 +1,64 @@
+@import "src/styles/variables";
+
+.button {
+  @include button-common;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: $mainFontColor;
+  transition: all 0.2s linear;
+  &:hover {
+    transform: scale(1.1);
+    transform-origin: center;
+  }
+  .text {
+    margin-right: 10px;
+    @include font-style($mainFont, normal, 18px, 500, none, 160%);
+  }
+  .arrow {
+    @include height-width(3px, 7px);
+  }
+  .rotate {
+      transform: rotate(180deg);
+      transform-origin: center;
+  }
+}
+
+.list {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 114px;
+  background-color: $mainBackgroundColor;
+  transition: all 0.3s linear;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 5px 20px 0 rgba(34, 60, 80, 0.2);
+  opacity: 0;
+  animation: linear 0.3s forwards appearance;
+  &:focus {
+    border: 1px solid black;
+  }
+}
+
+.label {
+  padding: 10px 20px;
+  @include font-style($mainFont, normal, 18px, 500, none, 160%);
+  text-align: center;
+  color: $mainFontColor;
+  background-color: transparent;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(222, 222, 222, 0.3);
+  }
+  .input {
+    @include input-appearance-none;
+  }
+}
+
+@keyframes appearance {
+  100% {
+    opacity: 1;
+  }
+}

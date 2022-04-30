@@ -1,0 +1,34 @@
+@import "src/styles/variables";
+
+.set {
+  display: flex;
+  & + & {
+    margin-top: 10px;
+  }
+  .name {
+    color: inherit;
+  }
+  .attributes {
+    display: flex;
+    column-gap: 8px;
+    align-items: center;
+  }
+}
+
+.list {
+  align-items: flex-end;
+  .attributes {
+    margin-left: 14px;
+  }
+}
+
+.page {
+  flex-direction: column;
+  .attributes {
+    margin-top: 8px;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+}
