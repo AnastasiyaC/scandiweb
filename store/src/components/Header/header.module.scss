@@ -1,0 +1,25 @@
+@import "src/styles/variables";
+
+.header {
+  @include height-width($headerHeight, 100vw);
+  background-color: $mainBackgroundColor;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  .wrapper {
+    @include height-width(100%, $pageWrapper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    position: relative;
+  }
+}
+
+.icon-container {
+  @include height-width(28px, 31px);
+  @include absolute-center;
+  .icon {
+    @include image-contain;
+  }
+}

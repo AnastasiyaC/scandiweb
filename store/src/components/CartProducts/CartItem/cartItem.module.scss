@@ -1,0 +1,144 @@
+@import "src/styles/variables";
+
+.item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  .left {
+    display: flex;
+    flex-direction: column;
+    color: $mainFontColor;
+    .link {
+      display: block;
+      text-decoration: none;
+      color: $mainFontColor;
+    }
+    .attributes {
+      display: flex;
+      flex-direction: column;
+      .attribute {
+        display: flex;
+        grid-column-gap: 5px;
+        align-items: flex-end;
+        .swatch {
+          border: 1px solid rgba(29, 31, 34, 0.6);
+        }
+        .text {
+          border: 1px solid rgba(29, 31, 34, 0.3);
+          color: white;
+          background-color: #1D1F22;
+          @include flex-center;
+        }
+      }
+    }
+  }
+  .right {
+    display: flex;
+    .image-container {
+      background-color: initial;
+      position: relative;
+      .image {
+        position: absolute;
+      }
+      .arrow-left, .arrow-right {
+        @include font-style($mainFont, normal, 38px, 600, none, 100%);
+        color: $mainFontColor;
+        @include button-common;
+        @include flex-center;
+        background-color: transparent;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        transform-origin: center;
+        transition: all 0.3s linear;
+      }
+      .arrow-left {
+        left: 10px;
+      }
+      .arrow-right {
+        right: 10px;
+      }
+    }
+  }
+}
+
+.page {
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    @include height-width(1px, 100%);
+    background-color: rgba(229, 229, 229, 1);
+    top: -1px;
+  }
+  .brand {
+    margin: 0;
+    @include font-style($mainFont, normal, 30px, 600, none, 90%);
+  }
+  .name {
+    margin: 16px 0 0;
+    @include font-style($mainFont, normal, 30px, 400, none, 90%);
+  }
+  .price {
+    margin: 12px 0 0;
+    @include font-style($mainFont, normal, 24px, 700, none, 75%);
+  }
+  .image-container {
+    margin-left: 12px;
+    @include height-width(185px, 141px);
+    .image {
+      @include image-contain;
+    }
+  }
+  .attributes {
+    margin-top: 16px;
+    grid-row-gap: 6px;
+    .attribute {
+      &-name {
+        @include font-style($mainFont, normal, 12px, 300, none, 100%);
+      }
+      .swatch {
+        @include height-width(20px, 20px);
+      }
+      .text {
+        @include font-style($mainFont, normal, 10px, 400, none, 100%);
+        @include height-width(20px, 34px);
+      }
+    }
+  }
+}
+
+.overlay {
+  .brand, .name {
+    margin: 0;
+    @include font-style($mainFont, normal, 16px, 300, none, 160%);
+  }
+  .price {
+    margin: 0;
+    @include font-style($mainFont, normal, 16px, 500, none, 160%);
+  }
+  .image-container {
+    margin-left: 6px;
+    @include height-width(137px, 105px);
+    .image {
+      @include image-contain;
+    }
+  }
+  .attributes {
+    margin-top: 6px;
+    grid-row-gap: 2px;
+    .attribute {
+      &-name {
+        @include font-style($mainFont, normal, 10px, 300, none, 100%);
+      }
+      .swatch {
+        @include height-width(16px, 16px);
+      }
+      .text {
+        @include height-width(16px, 30px);
+        @include font-style($mainFont, normal, 8px, 300, none, 100%);
+      }
+    }
+  }
+}

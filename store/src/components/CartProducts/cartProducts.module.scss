@@ -1,0 +1,16 @@
+@import "src/styles/variables";
+
+.products {
+  @include height-width(100%, 100%);
+  .text {
+    @include font-style($mainFont, normal, 16px, 400, none, 160%);
+  }
+}
+
+.page {
+  margin: 39px 0 89px;
+}
+
+.overlay {
+  margin: 23px 0;
+}

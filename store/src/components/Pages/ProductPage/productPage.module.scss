@@ -1,0 +1,68 @@
+@import "src/styles/variables";
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  color: $mainFontColor;
+  .gallery {
+    margin-top: 153px;
+    overflow: hidden;
+    @include height-width(513px, 714px);
+    .image-main {
+      @include height-width(511px, 610px);
+      float: right;
+    }
+    .image-secondary {
+      @include height-width(80px, 79px);
+    }
+    .image-secondary + .image-secondary {
+      margin-top: 32px;
+    }
+    .image {
+      @include image-contain;
+    }
+  }
+  .about {
+    margin: 153px 0 0 115px;
+    @include height-width(513px, 292px);
+  }
+  .brand {
+    margin: 0;
+    @include font-style($mainFont, normal, 30px, 600, none, 90%);
+  }
+  .name {
+    margin: 16px 0 0;
+    @include font-style($mainFont, normal, 30px, 400, none, 90%);
+  }
+  .attributes-container {
+    margin-top: 33px;
+    @include font-style($robotoFont, normal, 18px, bold, uppercase, 100%);
+  }
+  .price {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    &-text {
+      @include font-style($mainFont, normal, 18px, 700, uppercase, 100%);
+    }
+    &-number {
+      margin-top: 10px;
+      @include font-style($mainFont, normal, 24px, 700, none, 75%);
+    }
+  }
+  .button-container {
+    margin-top: 30px;
+    @include height-width(52px, 100%);
+  }
+  .description {
+    margin-top: 30px;
+    @include font-style($robotoFont, normal, 16px, 400, none, 160%);
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+}
+

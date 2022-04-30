@@ -1,0 +1,38 @@
+@import "src/styles/variables";
+
+.counter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: $mainFontColor;
+  .symbol {
+    @include button-common;
+    border: 1px solid #1D1F22;
+    background-color: $mainBackgroundColor;
+    font-weight: 300;
+    color: $mainFontColor;
+  }
+}
+
+.page {
+  @include height-width(185px, 45px);
+  .symbol{
+    @include height-width(45px, 45px);
+    font-size: 26px;
+  }
+  .number{
+    @include font-style($mainFont, normal, 24px, 500, none, 160%);
+  }
+}
+
+.overlay {
+  @include height-width(137px, 24px);
+  .symbol{
+    @include height-width(24px, 24px);
+    font-size: 18px;
+  }
+  .number{
+    @include font-style($mainFont, normal, 16px, 500, none, 160%);
+  }
+}

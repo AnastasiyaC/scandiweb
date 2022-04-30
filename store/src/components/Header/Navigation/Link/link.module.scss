@@ -1,0 +1,41 @@
+.item {
+  &__navLink {
+    text-decoration: none;
+    //font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    text-transform: uppercase;
+    color: #1D1F22;
+    position: relative;
+    transition: all 0.3s linear;
+    &:hover {
+      color: #5ECE7B;
+    }
+    &_active {
+      color: #5ECE7B;
+      &:before {
+        content: '';
+        position: absolute;
+        width: 140%;
+        height: 3px;
+        top: calc(50% + 40px);
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 5px;
+        background-color: #5ECE7B;
+      }
+    }
+  }
+  & + & {
+    margin-left: 32px;
+  }
+}
+
+
+
+
+//.item__navLink_active {
+//  color: #5ECE7B;
+//}
