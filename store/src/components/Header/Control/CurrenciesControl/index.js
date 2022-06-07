@@ -1,9 +1,11 @@
-import React from "react";
-import classes from "./currencies.module.scss";
+import React from 'react';
+
+import { currencyVar } from '../../../../apolloClient/cashe';
+import { client } from '../../../../apolloClient';
+import { GET_CURRENCIES } from '../../../../graphQL/queries';
+
 import arrowIcon from './../../../../assets/icons/arrow-icon.png';
-import { currencyVar } from "../../../../apolloClient/cashe";
-import { client } from "../../../../apolloClient";
-import { GET_CURRENCIES } from "../../../../graphQL/queries";
+import classes from './currencies.module.scss';
 
 class CurrenciesControl extends React.Component {
     constructor(props) {
@@ -11,7 +13,7 @@ class CurrenciesControl extends React.Component {
         this.state = {
             currencies: [],
             selectedCurrency: currencyVar(),
-            currenciesListOpen: false,
+            currenciesListOpen: false
         };
         this.toggleCurrencyChange = this.toggleCurrencyChange.bind(this);
         this.toggleCurrenciesListOpen = this.toggleCurrenciesListOpen.bind(this);
@@ -21,7 +23,7 @@ class CurrenciesControl extends React.Component {
         this._loadData().then( (response) => {
             this.setState({
                 currencies: response.data.currencies
-            })
+            });
         });
     }
 
@@ -36,12 +38,12 @@ class CurrenciesControl extends React.Component {
     handleOutsideClick = (event) => {
         if (this.currencyControlWrapper && !this.currencyControlWrapper.contains(event.target)) {
             this.setState(prevState => ({
-                    currenciesListOpen: !prevState.currenciesListOpen
-                }),
-                this.setOutsideClickListener
+                currenciesListOpen: !prevState.currenciesListOpen
+            }),
+            this.setOutsideClickListener
             );
         }
-    }
+    };
 
     setOutsideClickListener() {
         this.state.currenciesListOpen ? this.addOutsideClickListener() : this.removeOutsideClickListener();
@@ -58,10 +60,10 @@ class CurrenciesControl extends React.Component {
 
     toggleCurrencyChange(event) {
         this.setState(prevState => ({
-                selectedCurrency: event.target.value,
-                currenciesListOpen: !prevState.currenciesListOpen
-            }),
-            this.setOutsideClickListener
+            selectedCurrency: event.target.value,
+            currenciesListOpen: !prevState.currenciesListOpen
+        }),
+        this.setOutsideClickListener
         );
         currencyVar(event.target.value);
         localStorage.setItem('currency', event.target.value);
@@ -70,8 +72,8 @@ class CurrenciesControl extends React.Component {
     _loadData = async () => {
         return await client.query({
             query: GET_CURRENCIES
-        })
-    }
+        });
+    };
 
     render() {
         const { currencies, selectedCurrency, currenciesListOpen } = this.state;
@@ -80,24 +82,24 @@ class CurrenciesControl extends React.Component {
             return null;
 
         const options = currencies.map(el => (
-                <label
-                    className={ classes.label }
-                    key={ el.label }
-                >
-                    <input
-                        type='radio'
-                        name='currencies'
-                        className={ classes.input}
-                        value={ el.symbol }
-                        onChange={ this.toggleCurrencyChange }
-                    />
-                    { el.symbol } { el.label }
-                </label>
+            <label
+                className={ classes.label }
+                key={ el.label }
+            >
+                <input
+                    type="radio"
+                    name="currencies"
+                    className={ classes.input }
+                    value={ el.symbol }
+                    onChange={ this.toggleCurrencyChange }
+                />
+                { el.symbol } { el.label }
+            </label>
 
-        ))
+        ));
 
         return (
-            <div ref={(element) => { this.currencyControlWrapper = element }}>
+            <div ref={ (element) => { this.currencyControlWrapper = element; } }>
                 <button
                     className={ classes.button }
                     onClick={ this.toggleCurrenciesListOpen }
@@ -109,16 +111,16 @@ class CurrenciesControl extends React.Component {
                         src={ arrowIcon }
                         className={ `${ classes.arrow } ${ currenciesListOpen ?
                             `${classes.rotate}` : ''}` }
-                        alt='icon'
+                        alt="arrow-icon"
                     />
                 </button>
                 { currenciesListOpen && (
-                    <form className={classes.list}>
+                    <form className={ classes.list }>
                         { options }
                     </form>
                 )}
             </div>
-        )
+        );
     }
 }
 

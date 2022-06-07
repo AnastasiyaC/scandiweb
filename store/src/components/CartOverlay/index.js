@@ -1,35 +1,36 @@
-import React from "react";
-import classes from "./cartOverlay.module.scss";
-import { NavLink } from "react-router-dom";
-import CartProductsHOC from "../CartProducts/CartProductsHOC";
-import PriceHOC from "../Common/Price/PriceWithHOC";
-import { totalPrice } from "../../apolloClient/cashe";
+import React from 'react';
+
+import { NavLink } from 'react-router-dom';
+
 import SimpleBar from 'simplebar-react';
+
+import CartProductsHOC from '../CartProducts/CartProductsHOC';
+import PriceHOC from '../Common/Price/PriceWithHOC';
+import { totalPriceVar } from '../../apolloClient/cashe';
+
+import classes from './cartOverlay.module.scss';
 import 'simplebar/dist/simplebar.min.css';
 
 class CartOverlay extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            price: totalPrice(),
-        }
+    componentWillUnmount() {
+        totalPriceVar([]);
     }
 
     render() {
-        const { toggleCartOverlay, itemsCount } = this.props;
+        const { toggleCartOverlay, itemsCount, totalPrices } = this.props;
 
         return (
             <div className={ classes.bag }>
-                <div className={ classes.wrapper}>
-                    <h3 className={ classes.title}>
+                <div className={ classes.wrapper }>
+                    <h3 className={ classes.title }>
                         My Bag:
                         <span className={ classes.items }>
-                            { itemsCount > 1 ? `  ${ itemsCount } items` : `  ${ itemsCount } item`}
+                            { itemsCount > 1 ? `  ${ itemsCount } items` : `  ${ itemsCount } item` }
                         </span>
                     </h3>
                     <div className={ classes.products }>
-                        <SimpleBar style={{ maxHeight: 'inherit' }}>
-                            <CartProductsHOC style='overlay'/>
+                        <SimpleBar style={ {maxHeight: 'inherit'} }>
+                            <CartProductsHOC styleMode="overlay"/>
                         </SimpleBar>
                     </div>
                     <div className={ classes.total }>
@@ -37,13 +38,13 @@ class CartOverlay extends React.Component {
                             Total:
                         </span>
                         <span className={ classes.price }>
-                            {!this.state.price.length ? "0.00" :
-                                <PriceHOC prices={ totalPrice() }/>}
+                            { !totalPrices.length ? '0.00' :
+                                <PriceHOC prices={ totalPrices }/> }
                         </span>
                     </div>
                     <div className={ classes.buttons }>
-                        <NavLink to='/cart' className={ `${classes.button} ${ classes['button-view']}` }
-                                 onClick={ toggleCartOverlay }
+                        <NavLink to="/cart" className={ `${classes.button} ${ classes['button-view']}` }
+                            onClick={ toggleCartOverlay }
                         >
                             view bag
                         </NavLink>
@@ -56,7 +57,7 @@ class CartOverlay extends React.Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 

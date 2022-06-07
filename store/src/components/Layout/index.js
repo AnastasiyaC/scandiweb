@@ -1,7 +1,9 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import classes from "./layout.module.scss";
-import Header from "../Header";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+
+import Header from '../Header';
+
+import classes from './layout.module.scss';
 
 class Layout extends React.Component {
     render() {
@@ -15,7 +17,7 @@ class Layout extends React.Component {
                 </main>
                 <footer/>
             </>
-        )
+        );
     }
 }
 

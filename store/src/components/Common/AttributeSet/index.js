@@ -1,9 +1,11 @@
-import React from "react";
-import { client } from "../../../apolloClient";
-import { GET_PRODUCT_ATTRIBUTES } from "../../../graphQL/queries";
-import { selectedAttributesVar } from "../../../apolloClient/cashe";
-import findObjectInArray from "../../../utils/findObjectInArray";
-import SingleAttributeSet from "./SingleAttributeSet";
+import React from 'react';
+
+import { client } from '../../../apolloClient';
+import { GET_PRODUCT_ATTRIBUTES } from '../../../graphQL/queries';
+import { selectedAttributesVar } from '../../../apolloClient/cashe';
+import findObjectInArray from '../../../utils/findObjectInArray';
+
+import SingleAttributeSet from './SingleAttributeSet';
 
 class AttributeSet extends React.Component {
     constructor(props) {
@@ -11,8 +13,8 @@ class AttributeSet extends React.Component {
         this.state = {
             attributes: [],
             disabled: false,
-            id: '',
-        }
+            id: ''
+        };
     }
 
     componentDidMount() {
@@ -22,7 +24,7 @@ class AttributeSet extends React.Component {
                 attributes: response.data.product.attributes,
                 disabled: response.data.product.inStock,
                 id: response.data.product.id
-            })
+            });
         });
     }
 
@@ -30,27 +32,27 @@ class AttributeSet extends React.Component {
         return await client.query({
             query: GET_PRODUCT_ATTRIBUTES,
             variables: { id: this.props.productId },
-            fetchPolicy: "network-only"
-        })
-    }
+            fetchPolicy: 'network-only'
+        });
+    };
 
     setAttributesVariable(response) {
         const map = new Map();
-        response.data.product.attributes.map(el => map.set(`${el.name}`, ''))
+        response.data.product.attributes.map(el => map.set(`${el.name}`, ''));
 
         selectedAttributesVar(
             findObjectInArray(response.data.product.id, selectedAttributesVar()) ?
                 [...selectedAttributesVar()] :
                 [...selectedAttributesVar(), {
                     id: response.data.product.id,
-                    attributes: Object.fromEntries(map.entries()),
+                    attributes: Object.fromEntries(map.entries())
                 }]
         );
     }
 
     render() {
         const { attributes, disabled, id } = this.state;
-        const { style } = this.props;
+        const { styleMode } = this.props;
 
         if( !attributes.length) return null;
 
@@ -61,16 +63,16 @@ class AttributeSet extends React.Component {
                 type={ el.type }
                 name={ el.name }
                 key={ el.id }
-                style={ style }
+                styleMode={ styleMode }
                 disabled={ !disabled }
             />
-        ))
+        ));
 
         return (
             <>
                 { attributesSet }
             </>
-        )
+        );
     }
 }
 

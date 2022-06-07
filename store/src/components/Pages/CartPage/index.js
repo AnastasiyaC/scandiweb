@@ -1,6 +1,8 @@
-import React from "react";
-import classes from "./cart.module.scss";
-import CartProductsHOC from "../../CartProducts/CartProductsHOC";
+import React from 'react';
+
+import CartProductsHOC from '../../CartProducts/CartProductsHOC';
+
+import classes from './cart.module.scss';
 
 class CartPage extends React.Component {
     render() {
@@ -9,7 +11,7 @@ class CartPage extends React.Component {
                 <h2 className={ classes.title }>
                     Cart
                 </h2>
-                <CartProductsHOC style='page'/>
+                <CartProductsHOC styleMode="page"/>
             </>
         );
     }

@@ -1,16 +1,13 @@
-import React from "react";
-import classes from "./counter.module.scss";
+import React from 'react';
+
+import classes from './counter.module.scss';
 
 class Counter extends React.Component{
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        const { style, increment, decrement, count } = this.props;
+        const { styleMode, increment, decrement, count } = this.props;
 
         return (
-            <div className={ `${classes.counter} ${classes[style]}` }>
+            <div className={ `${classes.counter} ${classes[styleMode]}` }>
                 <button
                     className={ classes.symbol }
                     onClick={ increment }
@@ -27,7 +24,7 @@ class Counter extends React.Component{
                     &ndash;
                 </button>
             </div>
-        )
+        );
     }
 }
 

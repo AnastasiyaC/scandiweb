@@ -8,17 +8,56 @@
   color: $mainFontColor;
   .gallery {
     margin-top: 153px;
-    overflow: hidden;
+    position: relative;
     @include height-width(513px, 714px);
-    .image-main {
-      @include height-width(511px, 610px);
-      float: right;
+    .slider {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      .slides-container {
+        @include height-width(513px, 610px);
+      }
+      .dots-container {
+        @include height-width(513px, 82px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .dot-button {
+          @include button-common();
+          background-color: transparent;
+          &:disabled {
+            border: 1px solid rgba(29, 31, 34, 0.2);
+          }
+        }
+        .dots {
+          @include height-width(100%, 100%);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          grid-row-gap: 27px;
+        }
+      }
     }
-    .image-secondary {
+    .button-up, .button-down {
+      width: 82px;
+      height: 32px;
+      font-size: 24px;
+      @include button-common;
+      background-color: transparent;
+    }
+    .button-up {
+      position: absolute;
+      top: -40px;
+    }
+    .button-down {
+      position: absolute;
+      top: calc(100% + 5px);
+    }
+    .image-slider {
+      @include height-width(513px, 610px);
+    }
+    .image-dot {
       @include height-width(80px, 79px);
-    }
-    .image-secondary + .image-secondary {
-      margin-top: 32px;
     }
     .image {
       @include image-contain;

@@ -1,12 +1,10 @@
-import React from "react";
-import classes from "./link.module.scss";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+
+import { NavLink } from 'react-router-dom';
+
+import classes from './link.module.scss';
 
 class Link extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const { to, name } = this.props;
 
@@ -21,7 +19,7 @@ class Link extends React.Component {
                     { name }
                 </NavLink>
             </li>
-        )
+        );
     }
 }
 

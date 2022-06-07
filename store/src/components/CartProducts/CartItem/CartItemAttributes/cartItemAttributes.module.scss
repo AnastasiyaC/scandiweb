@@ -1,0 +1,52 @@
+@import "src/styles/variables";
+
+.attributes {
+  display: flex;
+  grid-column-gap: 5px;
+  align-items: flex-end;
+  .swatch, .text {
+    appearance: none;
+    cursor: pointer;
+  }
+  .text {
+    color: white;
+    text-align: center;
+    border: 1px solid rgba(29, 31, 34, 0.3);
+    .option {
+      color: $mainFontColor;
+      font-family: $mainFont;
+    }
+  }
+}
+
+.page {
+  .label {
+    @include font-style($mainFont, normal, 12px, 400, none, 100%);
+  }
+  .swatch {
+    @include height-width(20px, 20px);
+  }
+  .text {
+    @include font-style($mainFont, normal, 10px, 500, none, 100%);
+    @include height-width(20px, 34px);
+    .option {
+      @include font-style($mainFont, normal, 10px, 500, none, 100%);
+    }
+  }
+}
+
+.overlay {
+  .label {
+    @include font-style($mainFont, normal, 10px, 300, none, 100%);
+  }
+  .swatch {
+    @include height-width(16px, 16px);
+  }
+  .text {
+    @include height-width(16px, 30px);
+    @include font-style($mainFont, normal, 8px, 400, none, 100%);
+    .option {
+      @include font-style($mainFont, normal, 8px, 400, none, 100%);
+    }
+  }
+}
