@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const GET_CATEGORIES = gql`
    query {
@@ -70,6 +70,16 @@ export const GET_CART_PRODUCT = gql`
               }
               amount
            }
+           attributes {
+              id
+              name
+              type
+              items {
+                  displayValue
+                  value
+                  id
+              }
+           }
        }
   }
 `;
@@ -94,4 +104,10 @@ export const GET_CATEGORY_PRODUCTS = gql`
       }
   }
 }
+`;
+
+export const GET_CART_ITEMS = gql`
+  query GetCartItems {
+    cartItems @client
+  }
 `;

@@ -1,23 +1,16 @@
-import React from "react";
-import classes from "./price.module.scss";
+import React from 'react';
 
 class Price extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        const {prices, currency, count } = this.props;
+        const { prices, currency } = this.props;
 
-        const price = prices.find( el => {
-            if (el.currency.symbol === currency) {
-                return el
-            }
-        })
+        const price = prices.find( el => (
+            el.currency.symbol === currency ? el : undefined
+        ));
 
         return (
-            <span className={ classes.price }>
-                 { price.currency.symbol } { count ? (price.amount * count).toFixed(2) : (price.amount).toFixed(2) }
+            <span>
+                { price.currency.symbol } { price.amount.toFixed(2) }
             </span>
         );
     }

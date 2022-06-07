@@ -1,15 +1,14 @@
-import React from "react";
-import classes from "./categoryPage.module.scss";
-import StoreProducts from "../../StoreProducts";
+import React from 'react';
+
+import StoreProducts from '../../StoreProducts';
+
+import classes from './categoryPage.module.scss';
 
 
 class CategoryPage extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         const { name } = this.props;
+
         return (
             <>
                 <h2 className={ classes.title }>

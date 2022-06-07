@@ -1,10 +1,12 @@
-import React from "react";
-import classes from "./buttonAddToCart.module.scss";
-import bagIcon from "../../../assets/icons/bag_white-icon.png";
-import { cartItemsVar, selectedAttributesVar, totalItemsCount } from "../../../apolloClient/cashe";
-import findObjectInArray from "../../../utils/findObjectInArray";
-import checkEqualObjInArrOfObj from "../../../utils/checkEqualObjInArrOfObj";
-import Message from "../Message";
+import React from 'react';
+
+import bagIcon from '../../../assets/icons/bag_white-icon.png';
+import { cartItemsVar, selectedAttributesVar } from '../../../apolloClient/cashe';
+import findObjectInArray from '../../../utils/findObjectInArray';
+import checkEqualObjInArrOfObj from '../../../utils/checkEqualObjInArrOfObj';
+import Message from '../Message';
+
+import classes from './buttonAddToCart.module.scss';
 
 class ButtonAddToCart extends React.Component {
     constructor(props) {
@@ -12,7 +14,8 @@ class ButtonAddToCart extends React.Component {
         this.state = {
             disabledButton: false,
             messageIsActive: false,
-        }
+            messageText: ''
+        };
         this.addToCart = this.addToCart.bind(this);
     }
 
@@ -20,32 +23,28 @@ class ButtonAddToCart extends React.Component {
         if( this.checkAttributes() ) {
             const addedItem = findObjectInArray(this.props.productId, selectedAttributesVar());
             const sameItemInCart = checkEqualObjInArrOfObj(addedItem, cartItemsVar());
-            const newItemsCount = totalItemsCount() + 1;
 
             if( sameItemInCart ) {
-                sameItemInCart.count = sameItemInCart.count + 1;
+                const newCartItemsVar = cartItemsVar().map( (item) => {
+                    if (item === sameItemInCart) {
+                        const copyEl = Object.assign({}, item);
+                        copyEl.count = item.count + 1;
+                        return copyEl;
+                    }
+                    else return item;
+                });
+                cartItemsVar(newCartItemsVar);
             }
             else {
                 addedItem.count = 1;
                 cartItemsVar([...cartItemsVar(), JSON.parse(JSON.stringify(addedItem))]);
             }
-            totalItemsCount(newItemsCount);
-            localStorage.setItem('totalItemsCount', String(newItemsCount));
             localStorage.setItem('cartItems', JSON.stringify(cartItemsVar()));
             this.resetCheckedAttributes();
+            this.showMessage('This item was added to cart!');
         }
         else {
-            this.setState(prevState => ({
-                    disabledButton: !prevState.disabledButton,
-                    messageIsActive: !prevState.messageIsActive
-                }),
-                () => setTimeout(() => {
-                    this.setState(prevState => ({
-                        disabledButton: !prevState.disabledButton,
-                        messageIsActive: !prevState.messageIsActive
-                    }))
-                }, 2000)
-            );
+            this.showMessage('Please, select item\'s attributes!');
         }
     }
 
@@ -67,7 +66,7 @@ class ButtonAddToCart extends React.Component {
         const values = findObjectInArray(productId, selectedAttributesVar()).attributes;
 
         for(let key in values) {
-            values[key] = ''
+            values[key] = '';
         }
 
         selectedAttributesVar(
@@ -76,16 +75,31 @@ class ButtonAddToCart extends React.Component {
                     return {
                         id: productId,
                         attributes: values
-                    }
+                    };
                 }
-                else return el
+                else return el;
             })
-        )
+        );
+    }
+
+    showMessage(text) {
+        this.setState(prevState => ({
+            disabledButton: !prevState.disabledButton,
+            messageIsActive: !prevState.messageIsActive,
+            messageText: text
+        }),
+        () => setTimeout(() => {
+            this.setState(prevState => ({
+                disabledButton: !prevState.disabledButton,
+                messageIsActive: !prevState.messageIsActive
+            }));
+        }, 2000)
+        );
     }
 
     render() {
         const { inner, disabled } = this.props;
-        const { messageIsActive, disabledButton } = this.state;
+        const { messageIsActive, disabledButton, messageText } = this.state;
 
         return(
             <>
@@ -102,21 +116,21 @@ class ButtonAddToCart extends React.Component {
                             <img
                                 className={ classes.icon }
                                 src={ bagIcon }
-                                alt='bag-icon'
+                                alt="bag-icon"
                             />
                         </div> :
                         <span className={ classes.text }>
                         add to cart
-                    </span>
+                        </span>
                     }
                 </button>
                 { messageIsActive && (
                     <div className={classes['message-container']}>
-                        <Message message="Please, select item's attributes!"/>
+                        <Message message={messageText}/>
                     </div>
                 )}
             </>
-        )
+        );
     }
 }
 

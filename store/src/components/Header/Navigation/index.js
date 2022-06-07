@@ -1,22 +1,25 @@
-import React from "react";
-import classes from "./navigation.module.scss";
-import Link from "./Link";
-import { client } from "../../../apolloClient";
-import { GET_CATEGORIES } from "../../../graphQL/queries";
+import React from 'react';
+
+import { client } from '../../../apolloClient';
+
+import { GET_CATEGORIES } from '../../../graphQL/queries';
+
+import classes from './navigation.module.scss';
+import Link from './Link';
 
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            categories: [],
-        }
+            categories: []
+        };
     }
 
     componentDidMount() {
         this._loadData().then( (response) => {
             this.setState({
-                categories: response.data.categories,
-            })
+                categories: response.data.categories
+            });
         });
     }
 
@@ -24,19 +27,20 @@ class Navigation extends React.Component {
         return await client.query({
             query: GET_CATEGORIES
         });
-    }
+    };
 
     render() {
-        const { categories } = this.state
+        const { categories } = this.state;
+
         if( categories.length === 0 )
             return null;
 
         const links = categories.map( (el) => {
-            if( el.name.toLowerCase() === "all") {
-                return <Link to='/' name={ el.name } key={ el.name }/>
+            if( el.name.toLowerCase() === 'all') {
+                return <Link to="/" name={ el.name } key={ el.name }/>;
             }
-            else return <Link to={ `/${ el.name.toLowerCase()}` } name={ el.name } key={ el.name }/>
-        })
+            else return <Link to={ `/${ el.name.toLowerCase()}` } name={ el.name } key={ el.name }/>;
+        });
 
         return (
             <nav className={ classes.nav }>
@@ -44,7 +48,7 @@ class Navigation extends React.Component {
                     { links }
                 </ul>
             </nav>
-        )
+        );
     }
 }
 

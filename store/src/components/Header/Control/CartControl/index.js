@@ -1,24 +1,24 @@
-import React from "react";
-import classes from "./cartControl.module.scss";
-import bagIcon from "../../../../assets/icons/bag_black-icon.png"
-import CartOverlay from "../../../CartOverlay";
-import { totalItemsCount } from "../../../../apolloClient/cashe";
+import React from 'react';
+
+import bagIcon from '../../../../assets/icons/bag_black-icon.png';
+import CartOverlayWithHOC from '../../../CartOverlay/CartOverlayWithHOC';
+
+import classes from './cartControl.module.scss';
 
 class CartControl extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             cartOverlayOpen: false,
-            toggleCartOverlay: this.toggleCartOverlay.bind(this),
-            itemsCount: totalItemsCount(),
-        }
+            toggleCartOverlay: this.toggleCartOverlay.bind(this)
+        };
     }
 
     toggleCartOverlay() {
         this.setState(prevState => ({
-                cartOverlayOpen: !prevState.cartOverlayOpen
-            }),
-            this.setOutsideClickListener
+            cartOverlayOpen: !prevState.cartOverlayOpen
+        }),
+        this.setOutsideClickListener
         );
     }
 
@@ -32,19 +32,20 @@ class CartControl extends React.Component {
 
     handleOutsideClick = (event) => {
         if (this.cartControlWrapper && !this.cartControlWrapper.contains(event.target)) {
-            this.toggleCartOverlay()
+            this.toggleCartOverlay();
         }
-    }
+    };
 
     setOutsideClickListener() {
         this.state.cartOverlayOpen ? this.addOutsideClickListener() : this.removeOutsideClickListener();
     }
 
     render() {
-        const { toggleCartOverlay, cartOverlayOpen, itemsCount } = this.state;
+        const { toggleCartOverlay, cartOverlayOpen } = this.state;
+        const { totalItemsCount } = this.props;
 
         return (
-            <div ref={ (element) => { this.cartControlWrapper = element } }>
+            <div ref={ (element) => { this.cartControlWrapper = element; } }>
                 <button
                     className={ classes.button }
                     onClick={ toggleCartOverlay }
@@ -53,23 +54,23 @@ class CartControl extends React.Component {
                         <img
                             className={ classes.icon }
                             src={ bagIcon }
-                            alt='bag-icon'
+                            alt="bag-icon"
                         />
                     </div>
-                    { itemsCount !== 0 && (
-                        <div className={ classes['item-count']}>
-                            { itemsCount }
+                    { totalItemsCount !== 0 && (
+                        <div className={ classes['item-count'] }>
+                            { totalItemsCount }
                         </div>
                     )}
                 </button>
                 { cartOverlayOpen && (
-                    <CartOverlay
+                    <CartOverlayWithHOC
                         toggleCartOverlay={ toggleCartOverlay }
-                        itemsCount={ itemsCount }
+                        itemsCount={ totalItemsCount }
                     />
                 )}
             </div>
-        )
+        );
     }
 }
 

@@ -1,31 +1,30 @@
-import React from "react";
-import classes from "./storeProductItem.module.scss";
-import { Link } from "react-router-dom";
-import ButtonAddToCart from "../../Common/ButtonAddToCart";
-import PriceHOC from "../../Common/Price/PriceWithHOC";
-import AttributeSet from "../../Common/AttributeSet";
+import React from 'react';
+
+import { Link } from 'react-router-dom';
+
+import ButtonAddToCart from '../../Common/ButtonAddToCart';
+import PriceHOC from '../../Common/Price/PriceWithHOC';
+import AttributeSet from '../../Common/AttributeSet';
+
+import classes from './storeProductItem.module.scss';
 
 class StoreProductItem extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        const {id, gallery, brand, name, prices, inStock} = this.props;
+        const { id, gallery, brand, name, prices, inStock } = this.props;
 
         return (
             <div className={ inStock ?
                 `${classes.item}` :
-                `${classes.item} ${classes.disable}`
-            }>
-                <div className={classes.wrapper}>
-                    <Link to={`/product/${id}`}
-                          className={ classes.link }>
+                `${classes.item} ${classes.disable}` }
+            >
+                <div className={ classes.wrapper }>
+                    <Link to={ `/product/${id}` }
+                        className={ classes.link }>
                         <div className={ classes['image-container'] }>
                             <img
                                 src={ gallery[0] }
-                                className={ classes.image}
-                                alt='store-item'
+                                className={ classes.image }
+                                alt="store-item"
                             />
                             { inStock || (
                                 <div className={ classes.stock }>
@@ -42,15 +41,15 @@ class StoreProductItem extends React.Component {
                             </span>
                         </div>
                     </Link>
-                    <div className={ classes['button-container']}>
-                        <ButtonAddToCart productId={ id } inner='icon' disabled={ inStock }/>
+                    <div className={ classes['button-container'] }>
+                        <ButtonAddToCart productId={ id } inner="icon" disabled={ inStock }/>
                     </div>
                     <div className={ classes['attributes-container'] }>
-                        <AttributeSet productId={ id } style='list'/>
+                        <AttributeSet productId={ id } styleMode="list"/>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 

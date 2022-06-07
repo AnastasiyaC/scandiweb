@@ -1,22 +1,24 @@
-import React from "react";
-import classes from "./storeProducts.module.scss";
-import { GET_CATEGORY_PRODUCTS } from "../../graphQL/queries";
-import { client } from "../../apolloClient";
-import StoreProductItem from "./StoreProductItem";
+import React from 'react';
+
+import { GET_CATEGORY_PRODUCTS } from '../../graphQL/queries';
+import { client } from '../../apolloClient';
+
+import classes from './storeProducts.module.scss';
+import StoreProductItem from './StoreProductItem';
 
 class StoreProducts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: [],
-        }
+            products: []
+        };
     }
 
     componentDidMount() {
         this._loadData().then( (response) => {
             this.setState({
                 products: response.data.category.products
-            })
+            });
         });
     }
 
@@ -25,7 +27,7 @@ class StoreProducts extends React.Component {
             this._loadData(this.props.category).then( (response) => {
                 this.setState({
                     products: response.data.category.products
-                })
+                });
             });
         }
     }
@@ -36,9 +38,9 @@ class StoreProducts extends React.Component {
             variables: {
                 CategoryInput: { title: this.props.category }
             },
-            fetchPolicy: "network-only"
-        })
-    }
+            fetchPolicy: 'network-only'
+        });
+    };
 
     render() {
         const { products } = this.state;
@@ -58,13 +60,13 @@ class StoreProducts extends React.Component {
                 inStock={ el.inStock }
                 attributes={ el.attributes }
             />
-        ))
+        ));
 
         return (
             <div className={ classes.products }>
                 { storeItems ? storeItems : 'no store items' }
             </div>
-        )
+        );
     }
 }
 

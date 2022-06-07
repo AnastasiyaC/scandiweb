@@ -17,31 +17,15 @@
     .attributes {
       display: flex;
       flex-direction: column;
-      .attribute {
-        display: flex;
-        grid-column-gap: 5px;
-        align-items: flex-end;
-        .swatch {
-          border: 1px solid rgba(29, 31, 34, 0.6);
-        }
-        .text {
-          border: 1px solid rgba(29, 31, 34, 0.3);
-          color: white;
-          background-color: #1D1F22;
-          @include flex-center;
-        }
-      }
     }
   }
   .right {
     display: flex;
-    .image-container {
+    .slider-container {
       background-color: initial;
       position: relative;
-      .image {
-        position: absolute;
-      }
-      .arrow-left, .arrow-right {
+      .arrow-left,
+      .arrow-right {
         @include font-style($mainFont, normal, 38px, 600, none, 100%);
         color: $mainFontColor;
         @include button-common;
@@ -60,6 +44,7 @@
         right: 10px;
       }
     }
+
   }
 }
 
@@ -84,28 +69,19 @@
     margin: 12px 0 0;
     @include font-style($mainFont, normal, 24px, 700, none, 75%);
   }
-  .image-container {
+  .slider-container {
     margin-left: 12px;
     @include height-width(185px, 141px);
-    .image {
-      @include image-contain;
+    .image-container{
+      @include height-width(185px, 141px);
+      .image {
+        @include image-contain;
+      }
     }
   }
   .attributes {
     margin-top: 16px;
     grid-row-gap: 6px;
-    .attribute {
-      &-name {
-        @include font-style($mainFont, normal, 12px, 300, none, 100%);
-      }
-      .swatch {
-        @include height-width(20px, 20px);
-      }
-      .text {
-        @include font-style($mainFont, normal, 10px, 400, none, 100%);
-        @include height-width(20px, 34px);
-      }
-    }
   }
 }
 
@@ -118,27 +94,18 @@
     margin: 0;
     @include font-style($mainFont, normal, 16px, 500, none, 160%);
   }
-  .image-container {
+  .slider-container {
     margin-left: 6px;
     @include height-width(137px, 105px);
-    .image {
-      @include image-contain;
+    .image-container{
+      @include height-width(137px, 105px);
+      .image {
+        @include image-contain;
+      }
     }
   }
   .attributes {
     margin-top: 6px;
     grid-row-gap: 2px;
-    .attribute {
-      &-name {
-        @include font-style($mainFont, normal, 10px, 300, none, 100%);
-      }
-      .swatch {
-        @include height-width(16px, 16px);
-      }
-      .text {
-        @include height-width(16px, 30px);
-        @include font-style($mainFont, normal, 8px, 300, none, 100%);
-      }
-    }
   }
 }
